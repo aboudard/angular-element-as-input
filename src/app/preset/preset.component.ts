@@ -28,7 +28,7 @@ export class PresetComponent implements OnInit, OnDestroy {
       console.log('click event');
     })
 
-    this.renderer2.listen(this.btn, 'click', () => {
+    this.unlistener = this.renderer2.listen(this.btn, 'click', () => {
       console.log('click');
     });
 

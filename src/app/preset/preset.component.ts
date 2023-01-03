@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import { PresetBtnComponent } from '../preset-btn/preset-btn.component';
 
 @Component({
@@ -6,14 +6,11 @@ import { PresetBtnComponent } from '../preset-btn/preset-btn.component';
   templateUrl: './preset.component.html',
   styleUrls: ['./preset.component.css']
 })
-export class PresetComponent implements OnInit, OnDestroy {
+export class PresetComponent implements OnInit {
 
   @Input() btn!: PresetBtnComponent;
 
-  private unlistener!: () => void;
-
   constructor(
-    private renderer2: Renderer2
   ) { }
 
   handleEvent($event){
@@ -21,25 +18,15 @@ export class PresetComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log(this.btn);
 
+    console.log(this.btn);
+    
 
     this.btn.clickEvent.subscribe(() => {
-      console.log('click event');
+      this.btn.label = 'test';
     })
 
-    this.unlistener = this.renderer2.listen(this.btn, 'click', () => {
-      console.log('click');
-    });
-
-    /*this.btn.addEventListener('click', () => {
-      console.log('click');
-    });*/
-
   }
 
-  ngOnDestroy() {
-    this.unlistener();
-  }
 
 }
